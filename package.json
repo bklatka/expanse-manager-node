@@ -1,0 +1,23 @@
+{
+  "name": "expense-manager-node",
+  "version": "0.0.1",
+  "description": "Backend for expense manager app",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bklatka.github.com:bklatka/expense-manager-node.git"
+  },
+  "author": "Bernard Klatka",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongodb": "2.2.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
