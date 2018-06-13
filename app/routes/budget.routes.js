@@ -1,13 +1,16 @@
 const ObjectId = require('mongodb').ObjectId;
 
+const urlSegment = '/budget';
+const collectionName = require('../collections').budget;
+
 module.exports = (app, db) => {
-  app.post('/expenses', (req, res) => {
+  app.post(urlSegment, (req, res) => {
     const expense = {
       name: req.body.name,
       type: req.body.type,
       value: req.body.value
     };
-    db.collection('expenses').insert(expense, (err, result) => {
+    db.collection(collectionName).insert(expense, (err, result) => {
       if (err) {
         res.send({ error: 'An error has occurred' });
       } else {
@@ -16,10 +19,10 @@ module.exports = (app, db) => {
     });
   });
 
-  app.delete('/expenses/:id', (req, res) => {
+  app.delete(`${urlSegment}/:id`, (req, res) => {
     const id = req.params.id;
     const details = { _id: new ObjectId(id) };
-    db.collection('expenses').remove(details, (err, item) => {
+    db.collection(collectionName).remove(details, (err, item) => {
       if (err) {
         res.send({ error: 'Error removing object' });
       } else {
@@ -28,11 +31,11 @@ module.exports = (app, db) => {
     });
   });
 
-  app.put('/expenses/:id', (req, res) => {
+  app.put(`${urlSegment}/:id`, (req, res) => {
     const id = req.params.id;
     const details = { _id: new ObjectId(id) };
     const updated = { name: res.body.name, value: res.body.value };
-    db.collection('expenses').update(details, updated, (err, item) => {
+    db.collection(collectionName).update(details, updated, (err, item) => {
       if (err) {
         res.send({ error: 'Error occured' });
       } else {
@@ -41,8 +44,8 @@ module.exports = (app, db) => {
     });
   });
 
-  app.get('/expenses', (req, res) => {
-    db.collection('expenses')
+  app.get(urlSegment, (req, res) => {
+    db.collection(collectionName)
       .find({})
       .toArray((err, list) => {
         if (err) {
@@ -53,7 +56,7 @@ module.exports = (app, db) => {
       });
   });
 
-  app.get('/expenses/:id', (req, res) => {
+  app.get(`${urlSegment}/:id`, (req, res) => {
     const id = req.params.id;
     const details = { _id: new ObjectId(id) };
     db.collection('expenses').findOne(details, (err, item) => {
