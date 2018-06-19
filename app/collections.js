@@ -1,1 +1,1 @@
-module.exports.budget = 'budget';
+module.exports.budget = 'budgets';
