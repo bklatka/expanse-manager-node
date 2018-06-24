@@ -1,16 +1,8 @@
 const mongoose = require('mongoose');
 const dbConnectionString = require('../config/db').url;
 
-module.exports.connect = callback => {
-  mongoose.connect(dbConnectionString);
-  mongoose.connection
-    .once('open', () => {
-      console.log('Connected to DB');
-      callback();
-    })
-    .once('error', err => {
-      console.error('Error connecting to DB');
-    });
+module.exports.connect = () => {
+  return mongoose.connect(dbConnectionString);
 };
 
 module.exports.dropCollection = collectionName => {
