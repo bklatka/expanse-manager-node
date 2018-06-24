@@ -31,4 +31,12 @@ module.exports = app => {
         else res.send(updated);
     })
   });
+
+  app.delete(`${urlSegment}/:entityId`, (req, res) => {
+     const entityId = req.params['entityId'];
+     BudgetEntity.deleteOne({ _id: entityId }, (err) => {
+         if (err) res.send(err);
+         else res.send(true);
+     })
+  });
 };
