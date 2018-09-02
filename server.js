@@ -4,11 +4,16 @@ const connectToDB = require('./app/db').connect;
 const routes = require('./app/routes/budget.routes');
 const app = express();
 
-const APP_PORT = 3000;
+loadEnv();
+
+const APP_PORT = process.env.PORT || 3000;
 // Adds parsing body of the request to the app
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.listen(APP_PORT);
+
+app.listen(APP_PORT, () => {
+  console.log(`Server is listening on port ${APP_PORT}`);
+});
 connectToDB().then(
   () => {
     console.log('Connected to DB');
@@ -34,3 +39,11 @@ app.use((req, res, next) => {
 });
 
 routes(app);
+
+function loadEnv() {
+  if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+  }
+  console.log(`DB login: ${process.env.DB_LOGIN}`);
+  console.log(`DB pass: ${process.env.DB_PASS}`);
+}
