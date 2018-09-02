@@ -6,7 +6,7 @@ const app = express();
 
 const APP_PORT = 3000;
 // Adds parsing body of the request to the app
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.listen(APP_PORT);
 connectToDB().then(
   () => {
