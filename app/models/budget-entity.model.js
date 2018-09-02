@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const collectionName = require('../collections').budget;
 
 const BudgetEntitySchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: [true, 'Name is required']
   },
