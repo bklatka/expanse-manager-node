@@ -1,24 +1,24 @@
-const urlSegment = '/budget';
+const urlSegment = '/budget/';
 
 const BudgetEntity = require('../models/budget-entity.model');
 
 module.exports = app => {
   app.post(urlSegment, (req, res) => {
-    const { name, type, value } = req.body;
+    const { title, type, value } = req.body;
     const entity = new BudgetEntity({
-      name,
+      title,
       type,
       value
     });
     entity.save((err, result) => {
-      if (err) res.send({ error: err.errors.type.message }, 400);
+      if (err) res.status(400).send({ error: err.message });
       else res.send(result);
     });
   });
 
   app.get(urlSegment, (req, res) => {
     BudgetEntity.find({}, (err, entities) => {
-      if (err) res.send(err, 400);
+      if (err) res.status(400).send(err);
       else res.send(entities);
     });
   });
@@ -30,7 +30,7 @@ module.exports = app => {
       req.body,
       { new: true },
       (err, updated) => {
-        if (err) res.send(err, 400);
+        if (err) res.status(400).send(err);
         else res.send(updated);
       }
     );
@@ -39,7 +39,7 @@ module.exports = app => {
   app.delete(`${urlSegment}/:entityId`, (req, res) => {
     const entityId = req.params['entityId'];
     BudgetEntity.deleteOne({ _id: entityId }, err => {
-      if (err) res.send(err, 400);
+      if (err) res.status(400).send(err);
       else res.send(true);
     });
   });
