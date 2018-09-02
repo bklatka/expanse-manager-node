@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const productionDbUrl = require('../config/db').url;
-const testDbUrl = require('../config/test-db').url;
 
 function connect() {
   const dbLogin = process.env.DB_LOGIN;
