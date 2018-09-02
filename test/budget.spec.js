@@ -1,36 +1,19 @@
-const mocha = require('mocha');
-const assert = require('assert');
-const connectToDb = require('../app/db-connection').connect;
-const dropCollection = require('../app/db-connection').dropCollection;
-const budgetCollectionName = require('../app/collections').budget;
-const BudgetEntity = require('../app/models/budget-entity.model');
 
-describe('Saving to DB', () => {
-  before(done => {
-    connectToDb(done);
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const chai = require('chai');
+const expect = chai.expect;
+const { connect, dropCollection } = require('../app/db');
+
+describe('Entities', () => {
+  before(() => {
+  
   });
-
-  beforeEach(done => {
-    dropCollection(budgetCollectionName).then(
-      () => {
-        done();
-      },
-      () => {
-        done();
-      }
-    );
+  
+  it('Should save entity', (done) => {
+  
   });
-
-  it('Should save model to DB', done => {
-    const entity = new BudgetEntity({
-      name: 'Test name',
-      type: 'input',
-      value: 200
-    });
-
-    entity.save().then(() => {
-      assert(!entity.isNew);
-      done();
-    });
-  });
+  
+  it('Should not save entity without type');
+  it('Should not save ')
 });
