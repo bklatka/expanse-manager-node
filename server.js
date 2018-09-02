@@ -7,6 +7,7 @@ const app = express();
 const APP_PORT = 3000;
 // Adds parsing body of the request to the app
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(APP_PORT);
 connectToDB().then(
   () => {
@@ -19,7 +20,7 @@ connectToDB().then(
 );
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', '*'); // TODO: Change this for prod
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
