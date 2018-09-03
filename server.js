@@ -44,6 +44,4 @@ function loadEnv() {
   if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
   }
-  console.log(`DB login: ${process.env.DB_LOGIN}`);
-  console.log(`DB pass: ${process.env.DB_PASS}`);
 }
